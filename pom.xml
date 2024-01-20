@@ -12,6 +12,7 @@
 	<groupId>com.tbb</groupId>
 	<artifactId>tbb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>tbb</name>
 	<description>tbb main project</description>
 
