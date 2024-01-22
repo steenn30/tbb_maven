@@ -12,7 +12,7 @@
 	<groupId>com.tbb</groupId>
 	<artifactId>tbb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>tbb</name>
 	<description>tbb main project</description>
 
@@ -118,9 +118,12 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <executable>true</executable>
+    </configuration>
+</plugin>
 		</plugins>
 	</build>
 
