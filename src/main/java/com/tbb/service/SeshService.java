@@ -19,6 +19,10 @@ public class SeshService {
 		return seshRepository.findAllByPostId(postId);
 	}
 	
+	public String getSeshNameBySeshId(Integer seshId) {
+		return seshRepository.findSeshBySeshId(seshId);
+	}
+	
 	public Sesh create(NewSeshDTO seshDTO) {
 		// Need to create new chat thread id first
 			// thread table that links sesh to thread

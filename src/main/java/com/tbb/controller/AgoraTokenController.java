@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tbb.dto.AgoraRepositoryDTO;
 import com.tbb.dto.NewSeshDTO;
 import com.tbb.entity.Sesh;
 import com.tbb.repository.AgoraRTMRepository;
@@ -33,14 +34,15 @@ public class AgoraTokenController {
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping(value="/agora/token/rtc")//consumes = "application/json"
-	public Object getRTCToken(@RequestBody AgoraRepository agoraRepository) {
+	public Object getRTCToken(@RequestBody AgoraRepositoryDTO agoraRepository2) {
 		
+		System.out.println("agoraRepsoitory:" + agoraRepository2.getChannelName().toString());
 		
 		RtcTokenBuilder token = new RtcTokenBuilder();
-        String channelName = agoraRepository.getChannelName();
-        int expireTime = agoraRepository.getExpirationTimeInSeconds();
+        String channelName = agoraRepository2.getChannelName();
+        int expireTime = agoraRepository2.getExpirationTimeInSeconds();
         RtcTokenBuilder.Role role = RtcTokenBuilder.Role.Role_Subscriber;
-        int uid = agoraRepository.getUid();
+        int uid = agoraRepository2.getUid();
         
      // check for null channelName
         if (channelName==null){
@@ -53,16 +55,16 @@ public class AgoraTokenController {
             expireTime = 3600;
         }
 
-        if(agoraRepository.getRole()==1){
+        if(agoraRepository2.getRole()==1){
             role = RtcTokenBuilder.Role.Role_Publisher;
-        }else if(agoraRepository.getRole()==0){
+        }else if(agoraRepository2.getRole()==0){
             role = RtcTokenBuilder.Role.Role_Attendee;
         }
         
         int timestamp = (int)(System.currentTimeMillis() / 1000 + expireTime);
 
 
-        String result = token.buildTokenWithUid(agoraRepository.getAppId(), agoraRepository.getAppCertificate(),
+        String result = token.buildTokenWithUid(AgoraRepositoryDTO.getAppId(), AgoraRepositoryDTO.getAppCertificate(),
                 channelName, uid, role, timestamp);
         System.out.print("controller:" + result);
         JSONObject jsondict = new JSONObject();
@@ -84,7 +86,7 @@ public class AgoraTokenController {
 		    }
 
 		    RtmTokenBuilder token = new RtmTokenBuilder();
-		    String result = token.buildToken(agoraRTMRepository.getAppId(), agoraRTMRepository.getAppCertificate(), userId, Role.Rtm_User, agoraRTMRepository.getExpireTimestamp());
+		    String result = token.buildToken(AgoraRTMRepository.getAppId(), AgoraRTMRepository.getAppCertificate(), userId, Role.Rtm_User, agoraRTMRepository.getExpireTimestamp());
 		    System.out.println(result);
 		    JSONObject jsondict = new JSONObject();
 		    jsondict.put("message",result);

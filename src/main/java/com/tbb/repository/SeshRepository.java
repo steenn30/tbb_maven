@@ -16,5 +16,8 @@ public interface SeshRepository extends JpaRepository<Sesh, Integer> {
 
 	@Query(value = "SELECT * FROM public.sesh s WHERE s.post_id = :postId", nativeQuery = true)
 	List<Sesh> findAllByPostId(@Param("postId")Integer postId);
+	
+	@Query(value = "SELECT s.sesh_name FROM public.sesh s WHERE s.chat_room_id = :chatroomId", nativeQuery = true)
+	String findSeshBySeshId(@Param("chatroomId")Integer chatroomId);
 
 }

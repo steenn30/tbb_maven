@@ -33,6 +33,15 @@ public class SeshController {
 		return allSeshByPostId;
 	}
 	
+	@CrossOrigin(origins = "*")
+	@GetMapping(value="/sesh/getseshname/{seshId}")
+	public String getSeshNameBySeshId(@PathVariable Integer seshId) {
+		
+		String seshName =  seshService.getSeshNameBySeshId(seshId);
+		
+		return seshName;
+	}
+	
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping(value="/sesh/newSesh")//consumes = "application/json"
